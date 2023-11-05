@@ -1,1 +1,2 @@
 # augd_A.I_Code_Generator
+The AI Code Generator is a sophisticated tool that uses artificial intelligence to create code based on user prompts. It supports multiple programming languages, allows users to access their code history, and provides a one-click copy function for generated code. It streamlines the development process, enhances efficiency, and can handle a wide range of coding tasks, making it a valuable resource for developers.
