@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #07475d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            overflow: hidden;
+
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+                /* Set the width of the scrollbar */
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #04364A;
+                /* Set the background color of the thumb */
+                border-radius: 6px;
+                /* Set the border radius of the thumb */
+            }
+
+            ::-webkit-scrollbar-corner {
+                background: transparent;
+                /* Set the background color of the corners */
+            }
+        }
+
+        .result {
+            background-color: #b1dad6;
+            overflow: auto;
+            max-width: 65vw;
+            max-height: 50vh;
+            padding: 1rem 5rem;
+            border-radius: 1rem;
+            border: 5px solid #04364A;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .inputField {
+            background-color: lightgrey;
+            width: 70vw;
+            height: 4rem;
+            border-radius: 0.5rem;
+            font-size: 1.7rem;
+            padding: 0 0.5rem;
+            margin: 2rem 0;
+            border: 3.5px solid rgb(6, 170, 170);
+        }
+
+        .submit {
+            height: 4.5rem;
+            width: 4.5rem;
+            border-radius: 50%;
+            border: none;
+            background-color: rgb(6, 170, 170);
+            cursor: pointer;
+        }
+
+        .submit>img {
+            height: 4.5rem;
+            width: 4.5rem;
+            margin-right: 5rem;
+            position: relative;
+            right: 0.4rem;
+            bottom: 0.05rem;
+        }
+
+        .submit:hover {
+            box-shadow: 0.6rem 0.6rem 1rem black;
+        }
+
+        .loading {
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            backdrop-filter: blur(8px);
+            flex-direction: column;
+            display: none;
+        }
+
+        .loading>.circles>* {
+            position: relative;
+            height: 2rem;
+            width: 2rem;
+            border-radius: 50%;
+            background-color: white;
+            animation: jump 1s infinite;
+        }
+
+        .loading>.circles>.circle2 {
+            animation-delay: 0.1s;
+        }
+
+        .loading>.circles>.circle3 {
+            animation-delay: 0.2s;
+        }
+
+        .loading>.circles>.circle4 {
+            animation-delay: 0.3s;
+        }
+
+        .circles {
+            display: flex;
+            gap: 1rem;
+        }
+
+        @keyframes jump {
+            0% {
+                bottom: 0rem
+            }
+
+            50% {
+                bottom: 4rem;
+            }
+
+            100% {
+                bottom: 0rem;
+            }
+        }
+
+        .loadingText {
+            font-family: 'Playpen Sans', cursive;
+        }
+
+        .logo {
+            position: absolute;
+            height: 9rem;
+            width: 9rem;
+            top: -1rem;
+            left: 0;
+            margin: 0;
+        }
+
+        .copy {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+        }
+
+        .resultSection {
+            display: flex;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            font-weight: bold;
+        }
+
+        .historybtn {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin: 1rem;
+            cursor: pointer;
+        }
+
+        .history {
+            background-color: rgba(0, 0, 0, 0.86);
+            max-height: 89.2vh;
+            max-width: 50vw;
+            position: absolute;
+            right: -100rem;
+            top: 5rem;
+            z-index: 1;
+            overflow: auto;
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+        }
+
+        .history>ul li {
+            color: white;
+            font-size: 1rem;
+            padding-right: 1rem;
+        }
+
+        .reveal {
+            animation: reveal 0.8s forwards
+        }
+
+        @keyframes reveal {
+            0% {
+                right: -100rem;
+            }
+
+            100% {
+                right: 0rem;
+            }
+        }
+
+        .hide {
+            animation: hide 0.8s forwards
+        }
+
+        @keyframes hide {
+            0% {
+                right: 0rem;
+            }
+
+            100% {
+                right: -100rem;
+            }
+        }
+
+        .prompt {
+            color: black;
+            background-color: cyan;
+            border-radius: 0.5rem;
+            width: auto;
+        }
+
+        .languagebtn {
+            background-color: transparent;
+            border: none;
+            margin: 0.5rem;
+            cursor: pointer;
+        }
+
+        .languageSection {
+            position: absolute;
+            right: 0;
+            top: 6rem;
+        }
+
+        .languageMenu {
+            background-color: rgba(0, 0, 0, 0.682);
+            color: white;
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            right: -100rem;
+        }
+
+        .languageMenu>* {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .languageMenu>*:hover {
+            color: cyan;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="circles">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="loadingText">
+            <h1 class="word">Generating</h1>
+        </div>
+    </div>
+    <a href="http://localhost:5000/"><img src="https://i.ibb.co/y5VzG2c/robot2.png" border="0" class="logo"></a>
+    <div class="historySection">
+        <button class="historybtn" title="History">
+            <img width="60" height="60"
+                src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/external-history-date-and-time-tanah-basah-glyph-tanah-basah-2.png"
+                alt="external-history-date-and-time-tanah-basah-glyph-tanah-basah-2" />
+        </button>
+        <div class="history">
+            <ul>
+                {% for item in history %}
+                <li>
+                    <pre>{{ item }}</pre>
+                </li>
+                <h3 class="prompt">
+                    <pre>{{ prompts[loop.index0] }}</pre>
+                </h3>
+                <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="languageSection">
+        <button class="languagebtn" title="Language">
+            <img width="60" height="60"
+                src="https://img.icons8.com/external-goofy-solid-kerismaker/96/external-language-education-goofy-solid-kerismaker.png"
+                alt="external-language-education-goofy-solid-kerismaker" />
+        </button>
+        <div class="languageMenu">
+            <button class="python">
+                <pre>Python</pre>
+            </button>
+            <button class="c">
+                <pre>C</pre>
+            </button>
+            <button class="java">
+                <pre>Java</pre>
+            </button>
+        </div>
+    </div>
+    <div class="resultSection">
+        <div class="result">
+            <pre><h2>{{message}}</h2></pre>
+        </div>
+        <button class="copy" title="Copy">
+            <img src="https://i.ibb.co/0XvZDj2/copy.png" alt="copy" border="0">
+        </button>
+    </div>
+    <form id="dataForm" method="post" action="/ask">
+        <input type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required>
+        <button type="submit" class="submit" title="Submit"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
+    </form>
+    <footer>
+        <p>&copy; 2023 Rectifiers. All rights reserved.</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(".inputField").focus();
+        var data = $(".result").text();
+        $(".submit").click(() => {
+            var interval = setInterval(() => {
+                //console.log($(".inputField").val());
+                if (($(".result").text().trim() == data.trim()) && $(".inputField").val() != "") {
+                    //console.log("loading...");
+                    $(".loading").css("display", "flex");
+                }
+                else {
+                    clearInterval(interval);
+                    console.log("Interval cleared!");
+                }
+            }, 100)
+            var words = ["Generating code...", "Please Wait...", "Finding the best approach..."]
+            var interval1 = setInterval(() => {
+                if (interval) {
+                    var index = Math.floor(Math.random() * 3)
+                    $(".loadingText>h1").text(words[index]);
+                }
+                else {
+                    clearInterval(interval1);
+                    console.log("Interval1 cleared!");
+                }
+            }, 2500)
+        })
+        $(".copy").click(() => {
+            var code = $(".result").text().trim();
+            const $tempTextArea = $("<textarea>");
+            $("body").append($tempTextArea);
+            $tempTextArea.val(code).select();
+            document.execCommand("copy");
+            $tempTextArea.remove();
+        })
+        let count = 0;
+        $(".historybtn").click(() => {
+            count++;
+            if (count % 2 != 0) {
+                $(".history").removeClass("hide");
+                $(".history").addClass("reveal");
+                $(".resultSection").css("filter", "blur(8px)");
+                $("form").css("filter", "blur(8px)");
+                $("footer").css("filter", "blur(8px)");
+            }
+            else {
+                $(".history").addClass("hide");
+                $(".history").removeClass("reveal");
+                $(".resultSection").css("filter", "blur(0)");
+                $("form").css("filter", "blur(0)");
+                $("footer").css("filter", "blur(0)");
+            }
+        })
+        let count1 = 0;
+        $(".languagebtn").click(() => {
+            count1++;
+            if (count1 % 2 != 0) {
+                $(".languageMenu").removeClass("hide");
+                $(".languageMenu").addClass("reveal");
+            }
+            else {
+                $(".languageMenu").removeClass("reveal");
+                $(".languageMenu").addClass("hide");
+            }
+        })
+        function selection(language){
+            $(".languageMenu").addClass("hide");
+            count1++;
+            var value = language;  // Set the value you want to send
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/language', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            xhr.send("value=" + value);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Handle the response if needed
+                    console.log(xhr.responseText);
+                }
+            };
+        }
+        $(".python").click(() => {
+            selection("python");
+        })
+        $(".c").click(() => {
+            selection("c");
+        })
+        $(".java").click(() => {
+            selection("java");
+        })
+    </script>
+</body>
+
+</html>
