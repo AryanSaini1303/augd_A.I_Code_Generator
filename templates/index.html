@@ -55,7 +55,7 @@
 
         .inputField {
             background-color: lightgrey;
-            width: 70vw;
+            width: 65vw;
             height: 4rem;
             border-radius: 0.5rem;
             font-size: 1.7rem;
@@ -65,8 +65,8 @@
         }
 
         .submit {
-            height: 4.5rem;
-            width: 4.5rem;
+            height: 3.8rem;
+            width: 3.8rem;
             border-radius: 50%;
             border: none;
             background-color: rgb(6, 170, 170);
@@ -74,8 +74,8 @@
         }
 
         .submit>img {
-            height: 4.5rem;
-            width: 4.5rem;
+            height: 3.8rem;
+            width: 3.8rem;
             margin-right: 5rem;
             position: relative;
             right: 0.4rem;
@@ -273,6 +273,10 @@
             color: cyan;
             font-size: 1.1rem;
         }
+        .voice{
+            padding: 0;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -337,6 +341,7 @@
     </div>
     <form id="dataForm" method="post" action="/ask">
         <input type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required>
+        <div class="voice"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png" alt="microphone"/></div>
         <button type="submit" class="submit" title="Submit"><img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
     </form>
