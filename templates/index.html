@@ -156,8 +156,10 @@
         .copy {
             background-color: transparent;
             border: none;
-            cursor: pointer;
+            cursor:grab;
             display: flex;
+            height: 2.5rem;
+            padding: 0.3rem;
         }
 
         .resultSection {
@@ -231,7 +233,7 @@
         .prompt {
             color: black;
             background-color: cyan;
-            border-radius: 0.5rem;
+            border-radius: 5px;
             width: auto;
         }
 
@@ -267,13 +269,17 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
+            max-height: 3.3rem;
         }
 
         .languageMenu>*:hover {
             color: cyan;
             font-size: 1.1rem;
         }
-        .voice{
+
+        .voice {
+            background-color: transparent;
+            border: none;
             padding: 0;
             cursor: pointer;
         }
@@ -341,10 +347,13 @@
     </div>
     <form id="dataForm" method="post" action="/ask">
         <input type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required>
-        <div class="voice"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png" alt="microphone"/></div>
         <button type="submit" class="submit" title="Submit"><img
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
-    </form>
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
+        </form>
+        <form action="/voice" class="voice" method="post">
+            <button class="voice"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png"
+                    alt="microphone" /></button>
+        </form>
     <footer>
         <p>&copy; 2023 Rectifiers. All rights reserved.</p>
     </footer>
@@ -414,7 +423,7 @@
                 $(".languageMenu").addClass("hide");
             }
         })
-        function selection(language){
+        function selection(language) {
             $(".languageMenu").addClass("hide");
             count1++;
             var value = language;  // Set the value you want to send
@@ -437,6 +446,22 @@
         })
         $(".java").click(() => {
             selection("java");
+        })
+        $(".voice").click(() => {
+            var interval = setInterval(() => {
+                    $(".loading").css("display", "flex");
+            }, 100)
+            var words = ["Generating code...", "Please Wait...", "Finding the best approach..."]
+            var interval1 = setInterval(() => {
+                if (interval) {
+                    var index = Math.floor(Math.random() * 3)
+                    $(".loadingText>h1").text(words[index]);
+                }
+                else {
+                    clearInterval(interval1);
+                    console.log("Interval1 cleared!");
+                }
+            }, 2500)
         })
     </script>
 </body>
