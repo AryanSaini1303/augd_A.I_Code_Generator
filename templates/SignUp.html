@@ -180,6 +180,7 @@
             align-items: center;
             font-family: 'Kdam Thmor Pro', sans-serif;
             opacity: 0;
+            display: none;
         }
         .reveal{
             animation: reveal 1s linear forwards;
@@ -457,6 +458,7 @@
             }
         });
         if($(".flag").text()=='true'){
+            $(".message").css("display","flex")
             $(".message").removeClass("hide");
             $(".message").addClass("reveal");
             setTimeout(()=>{
