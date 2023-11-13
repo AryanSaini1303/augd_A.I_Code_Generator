@@ -3,6 +3,7 @@ import openai
 import re
 import speech_recognition as sr
 from playsound import playsound
+import psycopg2 
 
 app = Flask(__name__)
 # Set your OpenAI API key
@@ -15,6 +16,11 @@ history=[]
 prompts=[]
 language=""#defining a global variable to use it in any routes
 user_question=""
+global conn
+conn = psycopg2.connect(database="CodeGenerator", user="postgres", 
+                        password="aryansaini9999", host="localhost", port="5432") 
+global cur
+cur = conn.cursor()
 
 def voice_to_text():
     while True:
@@ -39,7 +45,7 @@ def voice_to_text():
 
 @app.route('/')
 def index():
-    return render_template('index.html', title='AI Code generator', message='{(Code)}',history=history,prompts=prompts)
+    return render_template('LogIn.html')
 
 @app.route('/language', methods=['POST'])
 def languageSelected():
@@ -87,7 +93,6 @@ def voice():
             finalCode=code(response).replace("java","")
         else:
             finalCode=code(response).replace("python","")
-        # print(finalCode)
         # print(response)
         history.insert(0,finalCode)
         # print(history)
@@ -143,6 +148,49 @@ def ask_openai():
         # return jsonify({'response': "'"+response+"'"})
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+@app.route('/SignUp',methods=['POST'])
+def SignUp():
+    global cur
+    global conn
+    cur.close()
+    conn.close()
+    conn = psycopg2.connect(database="CodeGenerator", user="postgres",
+                    password="aryansaini9999", host="localhost", port="5432") 
+    cur = conn.cursor()
+    try:
+        cur.execute('''insert into users (name,password) values(%s,%s)''',(request.form['username'],request.form['password']))
+        conn.commit()
+        return render_template('LogIn.html',flag='true',message="You can Log in with your new account now")
+    except Exception as e:
+        print(e)
+        return render_template('SignUp.html',flag='true',message="Username already exists!")
 
+@app.route('/GoToSignUp',methods=['POST'])
+def GoToSignUp():
+    return render_template('SignUp.html')
+
+@app.route('/GoToLogIn',methods=['POST'])
+def GoToLogIn():
+    return render_template('LogIn.html')
+
+@app.route('/LogIn',methods=['POST'])
+def LogIn():
+    username=[]
+    password=[]
+    cur.execute('''select name,password from users''')
+    data=cur.fetchall()
+    i=0
+    while i<len(data):
+        username.append(data[i][0])
+        password.append(data[i][1])
+        i+=1
+    i=0
+    while i<len(data):
+        if request.form['username']==username[i] and request.form['password']==password[i]:
+            return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
+        i+=1
+    return render_template('LogIn.html',flag="true",message="Incorrect Username or Password!")
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
