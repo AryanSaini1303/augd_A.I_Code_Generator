@@ -309,10 +309,10 @@
             <ul>
                 {% for item in history %}
                 <li>
-                    <pre>{{ item }}</pre>
+                    <pre>{{ item[0] }}</pre>
                 </li>
                 <h3 class="prompt">
-                    <pre>{{ prompts[loop.index0] }}</pre>
+                    <pre>{{ prompts[loop.index0][0] }}</pre>
                 </h3>
                 <hr>
                 {% endfor %}
