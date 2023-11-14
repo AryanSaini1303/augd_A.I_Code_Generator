@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #07475d;
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,6 +19,8 @@
             overflow: hidden;
             z-index: -1;
             transition: filter 0.3s;
+            animation: fadeIn 1s linear forwards;
+            opacity: 0.1;
 
             ::-webkit-scrollbar {
                 width: 8px;
@@ -36,6 +38,14 @@
             ::-webkit-scrollbar-corner {
                 background: transparent;
                 /* Set the background color of the corners */
+            }
+        }
+        @keyframes fadeIn {
+            0%{
+                opacity: 0.1;
+            }
+            100%{
+                opacity: 1;
             }
         }
 
@@ -176,6 +186,7 @@
         .resultSection {
             display: flex;
             z-index: 1;
+            position: relative;
         }
 
         footer {
@@ -387,6 +398,11 @@
             display: none;
             opacity: 0;
             transition: all 0.5s;
+        }
+        .inputSection{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
@@ -705,15 +721,17 @@
             <img src="https://i.ibb.co/0XvZDj2/copy.png" alt="copy" border="0">
         </button>
     </div>
-    <form id="dataForm" method="post" action="/ask">
-        <input type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required>
-        <button type="submit" class="submit" title="Submit"><img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
-        </form>
-        <form action="/voice" class="voice" method="post">
-            <button class="voice" style="filter: invert(100%);"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png"
-                    alt="microphone" /></button>
-        </form>
+    <div class="inputSection">
+        <form id="dataForm" method="post" action="/ask">
+            <input type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required>
+            <button type="submit" class="submit" title="Submit"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
+            </form>
+            <form action="/voice" class="voice" method="post">
+                <button class="voice" style="filter: invert(100%);"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png"
+                        alt="microphone" /></button>
+            </form>
+    </div>
     <footer>
         <p class="copyright">&copy; 2023 Rectifiers. All rights reserved.</p>
     </footer>

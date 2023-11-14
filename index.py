@@ -70,10 +70,10 @@ def LogIn():
         if request.form['username']==username[i] and request.form['password']==password[i]:
             currentUserId=user_id[i]#here i have assigned value to a global variable which i want to use across the routes
             session['currentUserId'] = currentUserId#so i add the variable to a session for future use 
-            cur.execute('''select code from history where user_id=%s''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
+            cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
             global history
             history=cur.fetchall()
-            cur.execute('''select prompt from history where user_id=%s''',(currentUserId,))
+            cur.execute('''select prompt from history where user_id=%s order by id desc''',(currentUserId,))
             global prompts
             prompts=cur.fetchall()
             return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
@@ -137,15 +137,14 @@ def voice():
             user_question=user_question.replace(" in java language","")
         else:
             user_question=user_question.replace(" in python language","")
-        print(user_question)
         cur.execute('''insert into history (code,prompt,user_id) values(%s,%s,%s)''',(finalCode,user_question,currentUserId))
         conn.commit()
         # print(response)
         # print(history)
-        cur.execute('''select code from history where user_id=%s''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
+        cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
         global history
         history=cur.fetchall()
-        cur.execute('''select prompt from history where user_id=%s''',(currentUserId,))
+        cur.execute('''select prompt from history where user_id=%s order by id desc''',(currentUserId,))
         global prompts
         prompts=cur.fetchall()
         return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts)
@@ -207,10 +206,10 @@ def ask_openai():
         # print(finalCode)
         # print(response)
         # print(history)
-        cur.execute('''select code from history where user_id=%s''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
+        cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
         global history
         history=cur.fetchall()
-        cur.execute('''select prompt from history where user_id=%s''',(currentUserId,))
+        cur.execute('''select prompt from history where user_id=%s order by id desc''',(currentUserId,))
         global prompts
         prompts=cur.fetchall()
         return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts)
