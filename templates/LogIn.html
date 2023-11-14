@@ -28,6 +28,7 @@
             overflow: hidden;
             z-index: -1;
             align-content: stretch;
+            justify-content: center;
         }
 
         .cube {
@@ -95,12 +96,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
         .content {
+            position: relative;
+            bottom:9rem;
             z-index: 1;
-            height: 72vh;
-            width: 28vw;
+            height: 60rem;
+            width: 25rem;
             background-color: transparent;
             display: flex;
             justify-content: center;
@@ -138,9 +142,9 @@
             color:black;
         }
         .robot{
-            position: absolute;
-            bottom:26rem;
-            right:33rem;
+            position: relative;
+            top:2rem;
+            left:8rem;
             z-index: 10;
             height: 18rem;
             width: 14rem;
@@ -465,11 +469,11 @@
         <div class="cube cube251"></div>
         <div class="cube cube252"></div>
     </div>
-    <div class="logo">
-        <img src="https://i.ibb.co/M7PmkFm/d0547954-6679-4892-93be-12508962900c-removebg.png" alt="d0547954-6679-4892-93be-12508962900c-removebg" border="0" class="robot">
-        <div class="message">{{message}}</div>
-    </div>
     <div class="loginSection">
+        <div class="logo">
+            <img src="https://i.ibb.co/M7PmkFm/d0547954-6679-4892-93be-12508962900c-removebg.png" alt="d0547954-6679-4892-93be-12508962900c-removebg" border="0" class="robot">
+            <div class="message">{{message}}</div>
+        </div>
         <div class="content">
             <form action="/LogIn" method="POST">
                 <label for="heading">Log In</label>
