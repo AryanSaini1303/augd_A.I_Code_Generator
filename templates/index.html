@@ -17,6 +17,8 @@
             padding: 0;
             flex-direction: column;
             overflow: hidden;
+            z-index: -1;
+            transition: filter 0.3s;
 
             ::-webkit-scrollbar {
                 width: 8px;
@@ -25,7 +27,7 @@
             }
 
             ::-webkit-scrollbar-thumb {
-                background: #04364A;
+                background: grey;
                 /* Set the background color of the thumb */
                 border-radius: 6px;
                 /* Set the border radius of the thumb */
@@ -38,13 +40,14 @@
         }
 
         .result {
-            background-color: #b1dad6;
             overflow: auto;
             max-width: 65vw;
             max-height: 50vh;
             padding: 1rem 5rem;
             border-radius: 1rem;
-            border: 5px solid #04364A;
+            border: 1px solid white;
+            backdrop-filter: blur(10px);
+            color: white;
         }
 
         form {
@@ -54,14 +57,17 @@
         }
 
         .inputField {
-            background-color: lightgrey;
+            background-color: transparent;
+            backdrop-filter: blur(10px);
             width: 65vw;
             height: 4rem;
             border-radius: 0.5rem;
             font-size: 1.7rem;
             padding: 0 0.5rem;
             margin: 2rem 0;
-            border: 3.5px solid rgb(6, 170, 170);
+            border: 1px solid white;
+            z-index: 1;
+            color: white;
         }
 
         .submit {
@@ -69,8 +75,9 @@
             width: 3.8rem;
             border-radius: 50%;
             border: none;
-            background-color: rgb(6, 170, 170);
+            background-color:transparent;
             cursor: pointer;
+            z-index: 1;
         }
 
         .submit>img {
@@ -80,6 +87,7 @@
             position: relative;
             right: 0.4rem;
             bottom: 0.05rem;
+            filter: invert(100%);
         }
 
         .submit:hover {
@@ -142,14 +150,15 @@
 
         .loadingText {
             font-family: 'Playpen Sans', cursive;
+            color: white;
         }
 
         .logo {
             position: absolute;
-            height: 9rem;
-            width: 9rem;
-            top: -1rem;
-            left: 0;
+            height: 8rem;
+            width: 8rem;
+            top: 0.7rem;
+            left: 0.5rem;
             margin: 0;
         }
 
@@ -160,10 +169,13 @@
             display: flex;
             height: 2.5rem;
             padding: 0.3rem;
+            filter: invert(100%);
+            transition: all 0.2s;
         }
 
         .resultSection {
             display: flex;
+            z-index: 1;
         }
 
         footer {
@@ -177,14 +189,16 @@
             background-color: transparent;
             border: none;
             position: absolute;
-            right: 0;
-            top: 0;
+            right: -0.7rem;
+            top: -0.5rem;
             margin: 1rem;
             cursor: pointer;
+            filter: invert(100%);
+            transition: all 0.2s;
         }
 
         .history {
-            background-color: rgba(0, 0, 0, 0.86);
+            background-color: rgb(0, 0, 0);
             max-height: 89.2vh;
             max-width: 50vw;
             position: absolute;
@@ -194,6 +208,7 @@
             overflow: auto;
             border-top-left-radius: 1rem;
             border-bottom-left-radius: 1rem;
+            z-index: 100;
         }
 
         .history>ul li {
@@ -235,6 +250,7 @@
             background-color: cyan;
             border-radius: 5px;
             width: auto;
+            padding: 0 0.5rem;
         }
 
         .languagebtn {
@@ -242,12 +258,14 @@
             border: none;
             margin: 0.5rem;
             cursor: pointer;
+            filter: invert(100%);
+            transition: all 0.2s;
         }
 
         .languageSection {
             position: absolute;
-            right: 0;
-            top: 6rem;
+            right: -0.5rem;
+            top: 4.5rem;
         }
 
         .languageMenu {
@@ -282,11 +300,339 @@
             border: none;
             padding: 0;
             cursor: pointer;
+            z-index: 1;
+        }
+        .container {
+            position: absolute;
+            background-color: black;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem;
+            overflow: hidden;
+            z-index: 0;
+            align-content: stretch;
+            justify-content: center;
+        }
+
+        .cube {
+            border-radius: 0.2rem;
+            height: 70px;
+            width: 70px;
+            background-color: rgb(13, 13, 13);
+            z-index: 1;
+        }
+
+        .lightUp {
+            animation: lightUp 0.1s forwards
+        }
+
+        @keyframes lightUp {
+            100% {
+                background-color: rgb(12, 176, 12);
+            }
+        }
+
+        .lightDown {
+            animation: lightDown 1s forwards
+        }
+
+        @keyframes lightDown {
+            0% {
+                background-color: rgb(12, 176, 12);
+            }
+
+            100% {
+                background-color: rgb(13, 13, 13);
+            }
+        }
+
+        .gradient {
+            background: hsla(0, 0%, 100%, 1);
+            background: linear-gradient(90deg, transparent 0%, rgba(23, 172, 12, 0.534) 50%, transparent 100%);
+            background: -moz-linear-gradient(90deg, transparent 0%, rgba(23, 172, 12, 0.534) 50%, transparent 100%);
+            background: -webkit-linear-gradient(90deg, transparent 0%, rgba(23, 172, 12, 0.534) 50%, transparent 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#17E409", GradientType=1);
+            height: 90vh;
+            width: 100vw;
+            position: absolute;
+            bottom: 50rem;
+            z-index: 0;
+            animation: fall 2s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                bottom: 50rem;
+            }
+
+            100% {
+                bottom: -40rem;
+            }
+        }
+        .copyright{
+            color:rgb(56, 56, 56);
         }
     </style>
 </head>
 
 <body>
+    <div class="container">
+        <div class="gradient"></div>
+        <div class="cube cube1"></div>
+        <div class="cube cube2"></div>
+        <div class="cube cube3"></div>
+        <div class="cube cube4"></div>
+        <div class="cube cube5"></div>
+        <div class="cube cube6"></div>
+        <div class="cube cube7"></div>
+        <div class="cube cube8"></div>
+        <div class="cube cube9"></div>
+        <div class="cube cube10"></div>
+        <div class="cube cube11"></div>
+        <div class="cube cube12"></div>
+        <div class="cube cube13"></div>
+        <div class="cube cube14"></div>
+        <div class="cube cube15"></div>
+        <div class="cube cube16"></div>
+        <div class="cube cube17"></div>
+        <div class="cube cube18"></div>
+        <div class="cube cube19"></div>
+        <div class="cube cube20"></div>
+        <div class="cube cube21"></div>
+        <div class="cube cube22"></div>
+        <div class="cube cube23"></div>
+        <div class="cube cube24"></div>
+        <div class="cube cube25"></div>
+        <div class="cube cube26"></div>
+        <div class="cube cube27"></div>
+        <div class="cube cube28"></div>
+        <div class="cube cube29"></div>
+        <div class="cube cube30"></div>
+        <div class="cube cube31"></div>
+        <div class="cube cube32"></div>
+        <div class="cube cube33"></div>
+        <div class="cube cube34"></div>
+        <div class="cube cube35"></div>
+        <div class="cube cube36"></div>
+        <div class="cube cube37"></div>
+        <div class="cube cube38"></div>
+        <div class="cube cube39"></div>
+        <div class="cube cube40"></div>
+        <div class="cube cube41"></div>
+        <div class="cube cube42"></div>
+        <div class="cube cube43"></div>
+        <div class="cube cube44"></div>
+        <div class="cube cube45"></div>
+        <div class="cube cube46"></div>
+        <div class="cube cube47"></div>
+        <div class="cube cube48"></div>
+        <div class="cube cube49"></div>
+        <div class="cube cube50"></div>
+        <div class="cube cube51"></div>
+        <div class="cube cube52"></div>
+        <div class="cube cube53"></div>
+        <div class="cube cube54"></div>
+        <div class="cube cube55"></div>
+        <div class="cube cube56"></div>
+        <div class="cube cube57"></div>
+        <div class="cube cube58"></div>
+        <div class="cube cube59"></div>
+        <div class="cube cube60"></div>
+        <div class="cube cube61"></div>
+        <div class="cube cube62"></div>
+        <div class="cube cube63"></div>
+        <div class="cube cube64"></div>
+        <div class="cube cube65"></div>
+        <div class="cube cube66"></div>
+        <div class="cube cube67"></div>
+        <div class="cube cube68"></div>
+        <div class="cube cube69"></div>
+        <div class="cube cube70"></div>
+        <div class="cube cube71"></div>
+        <div class="cube cube72"></div>
+        <div class="cube cube73"></div>
+        <div class="cube cube74"></div>
+        <div class="cube cube75"></div>
+        <div class="cube cube76"></div>
+        <div class="cube cube77"></div>
+        <div class="cube cube78"></div>
+        <div class="cube cube79"></div>
+        <div class="cube cube80"></div>
+        <div class="cube cube81"></div>
+        <div class="cube cube82"></div>
+        <div class="cube cube83"></div>
+        <div class="cube cube84"></div>
+        <div class="cube cube85"></div>
+        <div class="cube cube86"></div>
+        <div class="cube cube87"></div>
+        <div class="cube cube88"></div>
+        <div class="cube cube89"></div>
+        <div class="cube cube90"></div>
+        <div class="cube cube91"></div>
+        <div class="cube cube92"></div>
+        <div class="cube cube93"></div>
+        <div class="cube cube94"></div>
+        <div class="cube cube95"></div>
+        <div class="cube cube96"></div>
+        <div class="cube cube97"></div>
+        <div class="cube cube98"></div>
+        <div class="cube cube99"></div>
+        <div class="cube cube100"></div>
+        <div class="cube cube101"></div>
+        <div class="cube cube102"></div>
+        <div class="cube cube103"></div>
+        <div class="cube cube104"></div>
+        <div class="cube cube105"></div>
+        <div class="cube cube106"></div>
+        <div class="cube cube107"></div>
+        <div class="cube cube108"></div>
+        <div class="cube cube109"></div>
+        <div class="cube cube110"></div>
+        <div class="cube cube111"></div>
+        <div class="cube cube112"></div>
+        <div class="cube cube113"></div>
+        <div class="cube cube114"></div>
+        <div class="cube cube115"></div>
+        <div class="cube cube116"></div>
+        <div class="cube cube117"></div>
+        <div class="cube cube118"></div>
+        <div class="cube cube119"></div>
+        <div class="cube cube120"></div>
+        <div class="cube cube121"></div>
+        <div class="cube cube122"></div>
+        <div class="cube cube123"></div>
+        <div class="cube cube124"></div>
+        <div class="cube cube125"></div>
+        <div class="cube cube126"></div>
+        <div class="cube cube127"></div>
+        <div class="cube cube128"></div>
+        <div class="cube cube129"></div>
+        <div class="cube cube130"></div>
+        <div class="cube cube131"></div>
+        <div class="cube cube132"></div>
+        <div class="cube cube133"></div>
+        <div class="cube cube134"></div>
+        <div class="cube cube135"></div>
+        <div class="cube cube136"></div>
+        <div class="cube cube137"></div>
+        <div class="cube cube138"></div>
+        <div class="cube cube139"></div>
+        <div class="cube cube140"></div>
+        <div class="cube cube141"></div>
+        <div class="cube cube142"></div>
+        <div class="cube cube143"></div>
+        <div class="cube cube144"></div>
+        <div class="cube cube145"></div>
+        <div class="cube cube146"></div>
+        <div class="cube cube147"></div>
+        <div class="cube cube148"></div>
+        <div class="cube cube149"></div>
+        <div class="cube cube150"></div>
+        <div class="cube cube151"></div>
+        <div class="cube cube152"></div>
+        <div class="cube cube153"></div>
+        <div class="cube cube154"></div>
+        <div class="cube cube155"></div>
+        <div class="cube cube156"></div>
+        <div class="cube cube157"></div>
+        <div class="cube cube158"></div>
+        <div class="cube cube159"></div>
+        <div class="cube cube160"></div>
+        <div class="cube cube161"></div>
+        <div class="cube cube162"></div>
+        <div class="cube cube163"></div>
+        <div class="cube cube164"></div>
+        <div class="cube cube165"></div>
+        <div class="cube cube166"></div>
+        <div class="cube cube167"></div>
+        <div class="cube cube168"></div>
+        <div class="cube cube169"></div>
+        <div class="cube cube170"></div>
+        <div class="cube cube171"></div>
+        <div class="cube cube172"></div>
+        <div class="cube cube173"></div>
+        <div class="cube cube174"></div>
+        <div class="cube cube175"></div>
+        <div class="cube cube176"></div>
+        <div class="cube cube177"></div>
+        <div class="cube cube178"></div>
+        <div class="cube cube179"></div>
+        <div class="cube cube180"></div>
+        <div class="cube cube181"></div>
+        <div class="cube cube182"></div>
+        <div class="cube cube183"></div>
+        <div class="cube cube184"></div>
+        <div class="cube cube185"></div>
+        <div class="cube cube186"></div>
+        <div class="cube cube187"></div>
+        <div class="cube cube188"></div>
+        <div class="cube cube189"></div>
+        <div class="cube cube190"></div>
+        <div class="cube cube191"></div>
+        <div class="cube cube192"></div>
+        <div class="cube cube193"></div>
+        <div class="cube cube194"></div>
+        <div class="cube cube195"></div>
+        <div class="cube cube196"></div>
+        <div class="cube cube197"></div>
+        <div class="cube cube198"></div>
+        <div class="cube cube199"></div>
+        <div class="cube cube200"></div>
+        <div class="cube cube201"></div>
+        <div class="cube cube202"></div>
+        <div class="cube cube203"></div>
+        <div class="cube cube204"></div>
+        <div class="cube cube205"></div>
+        <div class="cube cube206"></div>
+        <div class="cube cube207"></div>
+        <div class="cube cube208"></div>
+        <div class="cube cube209"></div>
+        <div class="cube cube210"></div>
+        <div class="cube cube211"></div>
+        <div class="cube cube212"></div>
+        <div class="cube cube213"></div>
+        <div class="cube cube214"></div>
+        <div class="cube cube215"></div>
+        <div class="cube cube216"></div>
+        <div class="cube cube217"></div>
+        <div class="cube cube218"></div>
+        <div class="cube cube219"></div>
+        <div class="cube cube220"></div>
+        <div class="cube cube221"></div>
+        <div class="cube cube222"></div>
+        <div class="cube cube223"></div>
+        <div class="cube cube224"></div>
+        <div class="cube cube225"></div>
+        <div class="cube cube226"></div>
+        <div class="cube cube227"></div>
+        <div class="cube cube228"></div>
+        <div class="cube cube229"></div>
+        <div class="cube cube230"></div>
+        <div class="cube cube231"></div>
+        <div class="cube cube232"></div>
+        <div class="cube cube233"></div>
+        <div class="cube cube234"></div>
+        <div class="cube cube235"></div>
+        <div class="cube cube236"></div>
+        <div class="cube cube237"></div>
+        <div class="cube cube238"></div>
+        <div class="cube cube239"></div>
+        <div class="cube cube240"></div>
+        <div class="cube cube241"></div>
+        <div class="cube cube242"></div>
+        <div class="cube cube243"></div>
+        <div class="cube cube244"></div>
+        <div class="cube cube245"></div>
+        <div class="cube cube246"></div>
+        <div class="cube cube247"></div>
+        <div class="cube cube248"></div>
+        <div class="cube cube249"></div>
+        <div class="cube cube250"></div>
+        <div class="cube cube251"></div>
+        <div class="cube cube252"></div>
+    </div>
     <div class="loading">
         <div class="circles">
             <div class="circle1"></div>
@@ -298,7 +644,6 @@
             <h1 class="word">Generating</h1>
         </div>
     </div>
-    <a href="http://localhost:5000/"><img src="https://i.ibb.co/y5VzG2c/robot2.png" border="0" class="logo"></a>
     <div class="historySection">
         <button class="historybtn" title="History">
             <img width="60" height="60"
@@ -351,11 +696,11 @@
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
         </form>
         <form action="/voice" class="voice" method="post">
-            <button class="voice"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png"
+            <button class="voice" style="filter: invert(100%);"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png"
                     alt="microphone" /></button>
         </form>
     <footer>
-        <p>&copy; 2023 Rectifiers. All rights reserved.</p>
+        <p class="copyright">&copy; 2023 Rectifiers. All rights reserved.</p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
@@ -399,16 +744,10 @@
             if (count % 2 != 0) {
                 $(".history").removeClass("hide");
                 $(".history").addClass("reveal");
-                $(".resultSection").css("filter", "blur(8px)");
-                $("form").css("filter", "blur(8px)");
-                $("footer").css("filter", "blur(8px)");
             }
             else {
                 $(".history").addClass("hide");
                 $(".history").removeClass("reveal");
-                $(".resultSection").css("filter", "blur(0)");
-                $("form").css("filter", "blur(0)");
-                $("footer").css("filter", "blur(0)");
             }
         })
         let count1 = 0;
@@ -462,6 +801,39 @@
                     console.log("Interval1 cleared!");
                 }
             }, 2500)
+        })
+        let count2 = 1;
+        $(".cube").hover(function () {
+            var name = $(this).attr('class');
+            name = name.replace("cube ", "")
+            name = name.replace(" lightUp", "")
+            name = name.replace(" lightDown", "")
+            count2++;
+            if (count2 % 2 == 0) {
+                $(`.${name}`).removeClass("lightDown");
+                $(`.${name}`).addClass("lightUp");
+            } else {
+                $(`.${name}`).removeClass("lightUp");
+                $(`.${name}`).addClass("lightDown");
+            }
+        });
+        $(".copy").click(()=>{
+            $(".copy").css("opacity","0.2   ");
+            setTimeout(()=>{
+                $(".copy").css("opacity","1");
+            },150)
+        })
+        $(".historybtn").click(()=>{
+            $(".historybtn").css("opacity","0.2   ");
+            setTimeout(()=>{
+                $(".historybtn").css("opacity","1");
+            },150)
+        })
+        $(".languagebtn").click(()=>{
+            $(".languagebtn").css("opacity","0.2   ");
+            setTimeout(()=>{
+                $(".languagebtn").css("opacity","1");
+            },150)
         })
     </script>
 </body>
