@@ -195,6 +195,7 @@
             cursor: pointer;
             filter: invert(100%);
             transition: all 0.2s;
+            z-index: 3;
         }
 
         .history {
@@ -208,7 +209,7 @@
             overflow: auto;
             border-top-left-radius: 1rem;
             border-bottom-left-radius: 1rem;
-            z-index: 100;
+            z-index: 3;
         }
 
         .history>ul li {
@@ -372,7 +373,20 @@
             }
         }
         .copyright{
-            color:rgb(56, 56, 56);
+            color:rgb(78, 77, 77);
+        }
+        .blur{
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top:0;
+            left: 0;
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+            display: none;
+            opacity: 0;
+            transition: all 0.5s;
         }
     </style>
 </head>
@@ -644,6 +658,7 @@
             <h1 class="word">Generating</h1>
         </div>
     </div>
+    <div class="blur"></div>
     <div class="historySection">
         <button class="historybtn" title="History">
             <img width="60" height="60"
@@ -744,10 +759,18 @@
             if (count % 2 != 0) {
                 $(".history").removeClass("hide");
                 $(".history").addClass("reveal");
+                $(".blur").css("display","inline");
+                setTimeout(()=>{
+                    $(".blur").css("opacity","1");
+                },100);
             }
             else {
                 $(".history").addClass("hide");
                 $(".history").removeClass("reveal");
+                $(".blur").css("opacity","0");
+                setTimeout(()=>{
+                    $(".blur").css("display","none");
+                },500);
             }
         })
         let count1 = 0;
@@ -818,13 +841,13 @@
             }
         });
         $(".copy").click(()=>{
-            $(".copy").css("opacity","0.2   ");
+            $(".copy").css("opacity","0.2");
             setTimeout(()=>{
                 $(".copy").css("opacity","1");
             },150)
         })
         $(".historybtn").click(()=>{
-            $(".historybtn").css("opacity","0.2   ");
+            $(".historybtn").css("opacity","0.2");
             setTimeout(()=>{
                 $(".historybtn").css("opacity","1");
             },150)
