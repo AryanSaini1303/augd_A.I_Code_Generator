@@ -78,11 +78,11 @@ def LogIn():
             prompts=cur.fetchall()
             return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
         i+=1
-    return render_template('LogIn.html',flag="true",message="Incorrect Username or Password!")
+    return render_template('LogIn.html',flag="true",message="Incorrect Username or Password!",title="AI Code Generator")
 
 @app.route('/')
 def index():
-    return render_template('LogIn.html')
+    return render_template('LogIn.html',title='AI Code Generator')
 
 @app.route('/language', methods=['POST'])
 def languageSelected():
@@ -230,18 +230,18 @@ def SignUp():
     try:
         cur.execute('''insert into users (name,password) values(%s,%s)''',(request.form['username'],request.form['password']))
         conn.commit()
-        return render_template('LogIn.html',flag='true',message="You can Log in with your new account now")
+        return render_template('LogIn.html',flag='true',message="You can Log in with your new account now",title="AI Code Generator")
     except Exception as e:
         print(e)
-        return render_template('SignUp.html',flag='true',message="Username already exists!")
+        return render_template('SignUp.html',flag='true',message="Username already exists!",title="AI Code Generator")
 
 @app.route('/GoToSignUp',methods=['POST'])
 def GoToSignUp():
-    return render_template('SignUp.html')
+    return render_template('SignUp.html',title='AI Code Generator')
 
 @app.route('/GoToLogIn',methods=['POST'])
 def GoToLogIn():
-    return render_template('LogIn.html')
+    return render_template('LogIn.html',title='AI Code Generator')
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
