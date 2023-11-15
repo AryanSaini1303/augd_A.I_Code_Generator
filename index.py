@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify,render_template,session
+from flask import Flask, request, jsonify,render_template,session,send_from_directory
 from flask_session import Session
 import openai
 import re
@@ -51,6 +51,11 @@ def voice_to_text():
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
             continue
     return text
+
+@app.route('/favicon.ico')
+def favicon():
+    # Assuming the favicon.ico file is in the 'static' folder
+    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/LogIn',methods=['POST'])
 def LogIn():
