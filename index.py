@@ -75,12 +75,15 @@ def LogIn():
         if request.form['username']==username[i] and request.form['password']==password[i]:
             currentUserId=user_id[i]#here i have assigned value to a global variable which i want to use across the routes
             session['currentUserId'] = currentUserId#so i add the variable to a session for future use 
-            cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
             global history
+            global prompts
+            cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
             history=cur.fetchall()
             cur.execute('''select prompt from history where user_id=%s order by id desc''',(currentUserId,))
-            global prompts
             prompts=cur.fetchall()
+            if history==[]:
+                history.append(("No history yet!",))
+                prompts.append(("🤔",))
             return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
         i+=1
     return render_template('LogIn.html',flag="true",message="Incorrect Username or Password!",title="AI Code Generator")
@@ -205,7 +208,6 @@ def ask_openai():
             user_question=user_question.replace(" in java language","")
         else:
             user_question=user_question.replace(" in python language","")
-        print(user_question)
         cur.execute('''insert into history (code,prompt,user_id) values(%s,%s,%s)''',(finalCode,user_question,currentUserId))
         conn.commit()
         # print(finalCode)
@@ -246,6 +248,18 @@ def GoToSignUp():
 @app.route('/GoToLogIn',methods=['POST'])
 def GoToLogIn():
     return render_template('LogIn.html',title='AI Code Generator')
+    
+@app.route('/clear')
+def clear():
+    history.clear()
+    prompts.clear()
+    global currentUserId
+    currentUserId=session.get('currentUserId',None)
+    cur.execute('''delete from history where user_id=%s''',(currentUserId,))
+    conn.commit()
+    history.append(("No history yet!",))
+    prompts.append(("🤔",))
+    return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

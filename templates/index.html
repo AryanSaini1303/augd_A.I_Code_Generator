@@ -404,6 +404,19 @@
             flex-direction: column;
             align-items: center;
         }
+        .clear{
+            cursor: pointer;
+            background-color: grey;
+            font-size: 1rem;
+            border-bottom-right-radius: 1rem;
+            padding: 0.3rem;
+            border: none;
+            transition: all 0.15s linear;
+        }
+        .clear:hover{
+            color:red;
+            background-color: black;
+        }
     </style>
 </head>
 
@@ -682,10 +695,13 @@
                 alt="external-history-date-and-time-tanah-basah-glyph-tanah-basah-2" />
         </button>
         <div class="history">
+            <form action="/clear" methods="GET">
+                <button action="/clear" methods="GET" class="clear">Clear history</button>
+            </form>
             <ul>
                 {% for item in history %}
                 <li>
-                    <pre>{{ item[0] }}</pre>
+                    <pre class="code">{{ item[0] }}</pre>
                 </li>
                 <h3 class="prompt">
                     <pre>{{ prompts[loop.index0][0] }}</pre>
@@ -876,6 +892,10 @@
                 $(".languagebtn").css("opacity","1");
             },150)
         })
+        if($(".code").text()=="No history yet!"){
+            $(".prompt").text("")
+            $(".prompt").css("background-color","transparent");
+        }
     </script>
 </body>
 
