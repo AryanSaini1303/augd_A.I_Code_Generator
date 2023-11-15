@@ -6,6 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: black;
@@ -70,7 +72,6 @@
             background-color: transparent;
             backdrop-filter: blur(10px);
             width: 65vw;
-            height: 4rem;
             border-radius: 0.5rem;
             font-size: 1.7rem;
             padding: 0 0.5rem;
@@ -407,15 +408,42 @@
         .clear{
             cursor: pointer;
             background-color: grey;
-            font-size: 1rem;
+            font-size: 0.9rem;
             border-bottom-right-radius: 1rem;
             padding: 0.3rem;
             border: none;
             transition: all 0.15s linear;
+            font-family: 'Kdam Thmor Pro', sans-serif;
         }
         .clear:hover{
             color:red;
             background-color: black;
+        }
+        .username{
+            z-index: 1;
+            color: rgb(37, 34, 34);
+            position: absolute;
+            top:1rem;
+            left:1rem;
+            font-size: 3rem;
+            font-family: 'Lilita One', sans-serif;
+            text-shadow: 0.5rem 0.5rem 2rem black;
+        }
+        .username::before{
+            content: "";
+            position:absolute;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            z-index: -1;
+            transform:scaleX(0);
+            transition: transform 0.2s;
+            transform-origin: right;
+            border-radius: 0.5rem;
+        }
+        .username:hover::before{
+            transform: scaleX(1);
+            transform-origin: left;
         }
     </style>
 </head>
@@ -688,6 +716,7 @@
         </div>
     </div>
     <div class="blur"></div>
+    <div class="username">{{username}}</div>
     <div class="historySection">
         <button class="historybtn" title="History">
             <img width="60" height="60"
@@ -739,7 +768,7 @@
     </div>
     <div class="inputSection">
         <form id="dataForm" method="post" action="/ask">
-            <input type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required>
+            <textarea type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required rows="2"></textarea>
             <button type="submit" class="submit" title="Submit"><img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
             </form>
@@ -893,8 +922,9 @@
             },150)
         })
         if($(".code").text()=="No history yet!"){
-            $(".prompt").text("")
+            $(".prompt").text("");
             $(".prompt").css("background-color","transparent");
+            $(".clear").css("display","none");
         }
     </script>
 </body>

@@ -55,7 +55,7 @@ def voice_to_text():
 @app.route('/favicon.ico')
 def favicon():
     # Assuming the favicon.ico file is in the 'static' folder
-    return send_from_directory(app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(app.static_folder, '/static/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/LogIn',methods=['POST'])
 def LogIn():
@@ -84,7 +84,11 @@ def LogIn():
             if history==[]:
                 history.append(("No history yet!",))
                 prompts.append(("🤔",))
-            return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
+            cur.execute('''select name from users where id=%s''',(currentUserId,))
+            conn.commit()
+            data=cur.fetchall()
+            currentUsername=data[0][0].capitalize()
+            return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts,username=currentUsername)
         i+=1
     return render_template('LogIn.html',flag="true",message="Incorrect Username or Password!",title="AI Code Generator")
 
@@ -155,7 +159,11 @@ def voice():
         cur.execute('''select prompt from history where user_id=%s order by id desc''',(currentUserId,))
         global prompts
         prompts=cur.fetchall()
-        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts)
+        cur.execute('''select name from users where id=%s''',(currentUserId,))
+        conn.commit()
+        data=cur.fetchall()
+        currentUsername=data[0][0].capitalize()
+        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts,username=currentUsername)
         # return jsonify({'response': "'"+response+"'"})
     except Exception as e:
         return jsonify({'error': str(e)})
@@ -219,7 +227,11 @@ def ask_openai():
         cur.execute('''select prompt from history where user_id=%s order by id desc''',(currentUserId,))
         global prompts
         prompts=cur.fetchall()
-        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts)
+        cur.execute('''select name from users where id=%s''',(currentUserId,))
+        conn.commit()
+        data=cur.fetchall()
+        currentUsername=data[0][0].capitalize()
+        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts,username=currentUsername)
         # return jsonify({'response': "'"+response+"'"})
     except Exception as e:
         return jsonify({'error': str(e)})
@@ -259,7 +271,11 @@ def clear():
     conn.commit()
     history.append(("No history yet!",))
     prompts.append(("🤔",))
-    return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts)
+    cur.execute('''select name from users where id=%s''',(currentUserId,))
+    conn.commit()
+    data=cur.fetchall()
+    currentUsername=data[0][0].capitalize()
+    return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history,prompts=prompts,username=currentUsername)
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

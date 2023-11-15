@@ -1,9 +1,16 @@
-code_list = [
-    ('\nprint("Hello World")\n',),
-    ('\n# Function to calculate the sum of two numbers\ndef sum_two_numbers(num1, num2):\n    return num1 + num2\n\n# Taking user input for two numbers\nnum1 = float(input("Enter the first number: "))\nnum2 = float(input("Enter the second number: "))\n\n# Calling the function and printing the result\nresult = sum_two_numbers(num1, num2)\nprint("The sum is:", result)\n',)
-]
+import time
 
-for code_tuple in code_list:
-    # Extracting the code from the tuple
-    code = code_tuple[0]
-    print(code)
+def countdown_timer(seconds):
+    while seconds:
+        mins, secs = divmod(seconds, 60)
+        timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        print(timeformat, end='\r')
+        time.sleep(1)
+        seconds -= 1
+  
+    print("Time's up!")
+
+# Set the timer duration in seconds
+timer_duration = 5
+
+countdown_timer(timer_duration)
