@@ -42,11 +42,13 @@
                 /* Set the background color of the corners */
             }
         }
+
         @keyframes fadeIn {
-            0%{
+            0% {
                 opacity: 0.1;
             }
-            100%{
+
+            100% {
                 opacity: 1;
             }
         }
@@ -86,7 +88,7 @@
             width: 3.8rem;
             border-radius: 50%;
             border: none;
-            background-color:transparent;
+            background-color: transparent;
             cursor: pointer;
             z-index: 1;
         }
@@ -176,7 +178,7 @@
         .copy {
             background-color: transparent;
             border: none;
-            cursor:grab;
+            cursor: grab;
             display: flex;
             height: 2.5rem;
             padding: 0.3rem;
@@ -315,6 +317,7 @@
             cursor: pointer;
             z-index: 1;
         }
+
         .container {
             position: absolute;
             background-color: black;
@@ -384,14 +387,16 @@
                 bottom: -40rem;
             }
         }
-        .copyright{
-            color:rgb(78, 77, 77);
+
+        .copyright {
+            color: rgb(78, 77, 77);
         }
-        .blur{
+
+        .blur {
             height: 100vh;
             width: 100vw;
             position: absolute;
-            top:0;
+            top: 0;
             left: 0;
             background-color: transparent;
             backdrop-filter: blur(5px);
@@ -400,12 +405,14 @@
             opacity: 0;
             transition: all 0.5s;
         }
-        .inputSection{
+
+        .inputSection {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .clear{
+
+        .clear {
             cursor: pointer;
             background-color: grey;
             font-size: 0.9rem;
@@ -415,33 +422,37 @@
             transition: all 0.15s linear;
             font-family: 'Kdam Thmor Pro', sans-serif;
         }
-        .clear:hover{
-            color:red;
+
+        .clear:hover {
+            color: red;
             background-color: black;
         }
-        .username{
+
+        .username {
             z-index: 1;
             color: rgb(37, 34, 34);
             position: absolute;
-            top:1rem;
-            left:1rem;
+            top: 1rem;
+            left: 1rem;
             font-size: 3rem;
             font-family: 'Lilita One', sans-serif;
             text-shadow: 0.5rem 0.5rem 2rem black;
         }
-        .username::before{
+
+        .username::before {
             content: "";
-            position:absolute;
+            position: absolute;
             height: 100%;
             width: 100%;
             background-color: white;
             z-index: -1;
-            transform:scaleX(0);
+            transform: scaleX(0);
             transition: transform 0.2s;
             transform-origin: right;
             border-radius: 0.5rem;
         }
-        .username:hover::before{
+
+        .username:hover::before {
             transform: scaleX(1);
             transform-origin: left;
         }
@@ -768,14 +779,15 @@
     </div>
     <div class="inputSection">
         <form id="dataForm" method="post" action="/ask">
-            <textarea type="text" id="question" name="question" placeholder="Type your query..." class="inputField" required rows="2"></textarea>
+            <textarea type="text" id="question" name="question" placeholder="Type your query..." class="inputField"
+                required rows="2"></textarea>
             <button type="submit" class="submit" title="Submit"><img
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
-            </form>
-            <form action="/voice" class="voice" method="post">
-                <button class="voice" style="filter: invert(100%);"><img width="55" height="55" src="https://img.icons8.com/sf-regular/48/microphone.png"
-                        alt="microphone" /></button>
-            </form>
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACSElEQVR4nO2az0ocQRDGf6eMOSQoGM0tHnPQk97MMSiBhHg0+gwS8S38c1ASCLnmERIX4xtIyDmuq6eoCYp61hgsaShBhpnZ3ZmumR7xgw8Gdre7Pr7u3qrqgXvcXfQBU8Ay0ACawBlwoXTP2/qZ+85boJdAEAGzwCbwH5Au6X6zAczoWKXjIbAAHOYIPo0HwDzQU5aIV8CeRwFx7gKTlgKc9WuGAuL8os57xSDws0QRovwBDPgSMaR2S0VsaQyF8ESPUamYe8DTvCJ6KlpOkrHMch3RnwIIXmL8kOeIlUA50akIZ99OAAFLCnc7/dNc8DDZODAGHBmJed+JGz7SjlEdb9hIzH67jT/raaIjFWEp5l2WkE2PEx0DIzruc+CPZyGNrHoiTypelTOXwOMkIVMG9ls78zpJyIqREEtnlpKENAyFWDnzNUlIy1iIhTPNJCGnJQjx7cxxkpCLkoTEnRkrMM75nRZyWtHS+ut7ae3UcLNvh3D8FnFCso7f5Ro5IcrFKlMUH05IVorSW7Ok8V9a0ujwvSZOCLBOBmZq4IQop7OERNoVD73U/Q08oA3mPUz0wrj5MNdOxI0rIbRJJYWtbjqOkwEELAm8Al7SJT4GELjEuEoORNo4lkC41ckGT0N/QNcKgxTEUEllcBpdVv4MTxioaJlt6WWTyWXoVUkiPlvfvU8YL7VmniM2LyJt7e97TjvmqnoDItKueEN7sd0Gf6lZ7HSRo9U3XG3wRtuY37SePrn1Uo17/qXl6aIWRY+8R3EPwsA1oBk5SAaWVBQAAAAASUVORK5CYII="></button>
+        </form>
+        <form action="/voice" class="voice" method="post">
+            <button class="voice" style="filter: invert(100%);"><img width="55" height="55"
+                    src="https://img.icons8.com/sf-regular/48/microphone.png" alt="microphone" /></button>
+        </form>
     </div>
     <footer>
         <p class="copyright">&copy; 2023 Rectifiers. All rights reserved.</p>
@@ -822,18 +834,18 @@
             if (count % 2 != 0) {
                 $(".history").removeClass("hide");
                 $(".history").addClass("reveal");
-                $(".blur").css("display","inline");
-                setTimeout(()=>{
-                    $(".blur").css("opacity","1");
-                },100);
+                $(".blur").css("display", "inline");
+                setTimeout(() => {
+                    $(".blur").css("opacity", "1");
+                }, 100);
             }
             else {
                 $(".history").addClass("hide");
                 $(".history").removeClass("reveal");
-                $(".blur").css("opacity","0");
-                setTimeout(()=>{
-                    $(".blur").css("display","none");
-                },500);
+                $(".blur").css("opacity", "0");
+                setTimeout(() => {
+                    $(".blur").css("display", "none");
+                }, 500);
             }
         })
         let count1 = 0;
@@ -874,7 +886,7 @@
         })
         $(".voice").click(() => {
             var interval = setInterval(() => {
-                    $(".loading").css("display", "flex");
+                $(".loading").css("display", "flex");
             }, 100)
             var words = ["Fetching your request...", "Please Wait...", "Finding the best approach..."]
             var interval1 = setInterval(() => {
@@ -903,28 +915,28 @@
                 $(`.${name}`).addClass("lightDown");
             }
         });
-        $(".copy").click(()=>{
-            $(".copy").css("opacity","0.2");
-            setTimeout(()=>{
-                $(".copy").css("opacity","1");
-            },150)
+        $(".copy").click(() => {
+            $(".copy").css("opacity", "0.2");
+            setTimeout(() => {
+                $(".copy").css("opacity", "1");
+            }, 150)
         })
-        $(".historybtn").click(()=>{
-            $(".historybtn").css("opacity","0.2");
-            setTimeout(()=>{
-                $(".historybtn").css("opacity","1");
-            },150)
+        $(".historybtn").click(() => {
+            $(".historybtn").css("opacity", "0.2");
+            setTimeout(() => {
+                $(".historybtn").css("opacity", "1");
+            }, 150)
         })
-        $(".languagebtn").click(()=>{
-            $(".languagebtn").css("opacity","0.2   ");
-            setTimeout(()=>{
-                $(".languagebtn").css("opacity","1");
-            },150)
+        $(".languagebtn").click(() => {
+            $(".languagebtn").css("opacity", "0.2   ");
+            setTimeout(() => {
+                $(".languagebtn").css("opacity", "1");
+            }, 150)
         })
-        if($(".code").text()=="No history yet!"){
+        if ($(".code").text() == "No history yet!") {
             $(".prompt").text("");
-            $(".prompt").css("background-color","transparent");
-            $(".clear").css("display","none");
+            $(".prompt").css("background-color", "transparent");
+            $(".clear").css("display", "none");
         }
     </script>
 </body>
