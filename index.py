@@ -133,26 +133,16 @@ def voice():
             pattern = r"```(.*?)```"
             matches = re.findall(pattern, text, re.DOTALL)
             return ' '.join(matches)
-        if language=="python":
-            finalCode=code(response).replace("python","")
-        elif language=="c":
-            finalCode=code(response).replace("c","")
-        elif language=="java":
-            finalCode=code(response).replace("java","")
+        first_space_index = code(response).find('\n')
+        if first_space_index != -1:
+            # Extract the substring starting from the character after the first space
+            finalCode = code(response)[first_space_index+1:]
         else:
-            finalCode=code(response).replace("python","")
-        if language=="python":
-            user_question=user_question.replace(" in python language","")
-        elif language=="c":
-            user_question=user_question.replace(" in c language","")
-        elif language=="java":
-            user_question=user_question.replace(" in java language","")
-        else:
-            user_question=user_question.replace(" in python language","")
+            finalCode=code(response)
+        words=user_question.split()
+        user_question=' '.join(words[:-3])
         cur.execute('''insert into history (code,prompt,user_id) values(%s,%s,%s)''',(finalCode,user_question,currentUserId))
         conn.commit()
-        # print(response)
-        # print(history)
         cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
         global history
         history=cur.fetchall()
@@ -164,7 +154,6 @@ def voice():
         data=cur.fetchall()
         currentUsername=data[0][0].capitalize()
         return render_template('index.html', title='AI Code Generator', message=finalCode, history=history,prompts=prompts,username=currentUsername)
-        # return jsonify({'response': "'"+response+"'"})
     except Exception as e:
         return jsonify({'error': str(e)})
     
@@ -183,8 +172,6 @@ def ask_openai():
             user_question=user_question+" in java language"
         else:
             user_question=user_question+" in python language"
-        # print(user_question)
-        # user_question="code to print fibonacci series"
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -200,27 +187,16 @@ def ask_openai():
             pattern = r"```(.*?)```"
             matches = re.findall(pattern, text, re.DOTALL)
             return ' '.join(matches)
-        if language=="python":
-            finalCode=code(response).replace("python","")
-        elif language=="c":
-            finalCode=code(response).replace("c","")
-        elif language=="java":
-            finalCode=code(response).replace("java","")
+        first_space_index = code(response).find('\n')
+        if first_space_index != -1:
+            # Extract the substring starting from the character after the first space
+            finalCode = code(response)[first_space_index+1:]
         else:
-            finalCode=code(response).replace("python","")
-        if language=="python":
-            user_question=user_question.replace(" in python language","")
-        elif language=="c":
-            user_question=user_question.replace(" in c language","")
-        elif language=="java":
-            user_question=user_question.replace(" in java language","")
-        else:
-            user_question=user_question.replace(" in python language","")
+            finalCode=code(response)
+        words=user_question.split()
+        user_question=' '.join(words[:-3])
         cur.execute('''insert into history (code,prompt,user_id) values(%s,%s,%s)''',(finalCode,user_question,currentUserId))
         conn.commit()
-        # print(finalCode)
-        # print(response)
-        # print(history)
         cur.execute('''select code from history where user_id=%s order by id desc''',(currentUserId,))#"," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
         global history
         history=cur.fetchall()

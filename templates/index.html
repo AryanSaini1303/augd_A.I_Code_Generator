@@ -109,7 +109,7 @@
             height: 100vh;
             width: 100vw;
             position: absolute;
-            z-index: 2;
+            z-index: 4;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -796,7 +796,7 @@
                     console.log("Interval cleared!");
                 }
             }, 100)
-            var words = ["Generating code...", "Please Wait...", "Finding the best approach..."]
+            var words = ["Fetching your request...", "Please Wait...", "Finding the best approach..."]
             var interval1 = setInterval(() => {
                 if (interval) {
                     var index = Math.floor(Math.random() * 3)
@@ -876,7 +876,7 @@
             var interval = setInterval(() => {
                     $(".loading").css("display", "flex");
             }, 100)
-            var words = ["Generating code...", "Please Wait...", "Finding the best approach..."]
+            var words = ["Fetching your request...", "Please Wait...", "Finding the best approach..."]
             var interval1 = setInterval(() => {
                 if (interval) {
                     var index = Math.floor(Math.random() * 3)
