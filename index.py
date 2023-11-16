@@ -64,6 +64,7 @@ def favicon():
 @app.route('/LogIn', methods=['POST'])
 def LogIn():
     global currentUserId
+    user_id=[]
     username = []
     password = []
     cur.execute('''select id,name,password from users''')
