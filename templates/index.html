@@ -429,14 +429,11 @@
         }
 
         .username {
-            z-index: 1;
             color: rgb(37, 34, 34);
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
             font-size: 3rem;
             font-family: 'Lilita One', sans-serif;
             text-shadow: 0.5rem 0.5rem 2rem black;
+            cursor:default;
         }
 
         .username::before {
@@ -455,6 +452,48 @@
         .username:hover::before {
             transform: scaleX(1);
             transform-origin: left;
+        }
+        .usernameSection{
+            z-index: 1;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            overflow: hidden;
+        }
+        .changeProfile{
+            position: relative;
+            border-radius: 0.5rem;
+            z-index: -1;
+            color: black;
+            padding:1rem;
+            overflow: hidden;
+            transition: all 0.2s;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            cursor: pointer;
+            justify-content: center;
+        }
+        .changeProfile>*{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'Kdam Thmor Pro', sans-serif;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+        .changeProfile>*:hover{
+            text-decoration: underline;
+            color:rgb(3, 63, 3);
+        }
+        .username:hover+.changeProfile{/* hover on .username but property of .changeProfile changes*/
+            transform: scaleY(1);
+            transform-origin: top;
+        }
+        .changeProfile:hover{
+            transform: scaleY(1);
+            background-color: white;
         }
     </style>
 </head>
@@ -727,7 +766,12 @@
         </div>
     </div>
     <div class="blur"></div>
-    <div class="username">{{username}}</div>
+    <div class="usernameSection">
+        <div class="username">{{username}}</div>
+        <form action="/" class="changeProfile" methods="GET">
+            <button type="submit" action="/" methods="GET">Login with different account?</button>
+        </form>
+    </div>
     <div class="historySection">
         <button class="historybtn" title="History">
             <img width="60" height="60"
