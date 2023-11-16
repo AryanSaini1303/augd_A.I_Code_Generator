@@ -43,7 +43,7 @@ def voice_to_text():
             audio = r.listen(source)
         try:
             text = r.recognize_google(audio, language='en-IN')
-            # print("You said: ", text)
+            print("You said: ", text)
             break
         except sr.UnknownValueError:
             print("Can't understand audio, Try again.")
