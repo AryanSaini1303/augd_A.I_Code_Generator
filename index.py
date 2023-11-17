@@ -137,8 +137,6 @@ def voice():
             user_question = user_question+" in c language"
         elif language == "java":
             user_question = user_question+" in java language"
-        else:
-            user_question = user_question+" in python language"
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -194,8 +192,6 @@ def ask_openai():
             user_question = user_question+" in c language"
         elif language == "java":
             user_question = user_question+" in java language"
-        else:
-            user_question = user_question+" in python language"
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
