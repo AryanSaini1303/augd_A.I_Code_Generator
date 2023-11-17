@@ -217,13 +217,16 @@
             max-height: 89.2vh;
             max-width: 50vw;
             position: absolute;
-            right: -100rem;
+            right: 0;
             top: 5rem;
             z-index: 1;
             overflow: auto;
             border-top-left-radius: 1rem;
             border-bottom-left-radius: 1rem;
             z-index: 3;
+            transform:scaleX(0);
+            transform-origin:right;
+            opacity:0;
         }
 
         .history>ul li {
@@ -233,30 +236,34 @@
         }
 
         .reveal {
-            animation: reveal 0.8s forwards
+            animation: reveal 0.3s forwards linear
         }
 
         @keyframes reveal {
             0% {
-                right: -100rem;
+                transform: scaleX(0);
+                opacity: 0;
             }
 
             100% {
-                right: 0rem;
+                transform:scaleX(1);
+                opacity: 1;
             }
         }
 
         .hide {
-            animation: hide 0.8s forwards
+            animation: hide 0.3s forwards linear
         }
 
         @keyframes hide {
             0% {
-                right: 0rem;
+                transform:scaleX(1);
+                opacity: 1;
             }
 
             100% {
-                right: -100rem;
+                transform: scaleX(0);
+                opacity: 0;
             }
         }
 
@@ -292,7 +299,10 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            right: -100rem;
+            right: 0;
+            transform:scaleX(0);
+            transform-origin:right;
+            opacity:0;
         }
 
         .languageMenu>* {
@@ -954,8 +964,11 @@
             $(".java").css("color","white");
             $(".none").css("color","cyan");
         })
-        const lang=$(".check").text()
-        console.log(lang);
+        let lang=$(".check").text();
+        if(lang==""){
+            lang="none";
+        }
+        //console.log("language from js:",lang);
         $(`.${lang}`).css("color","cyan");
         $(".voice").click(() => {
             var interval = setInterval(() => {
@@ -974,8 +987,9 @@
             }, 2500)
         })
         let count2 = 1;
-        $(".cube").hover(function () {
+        $(".cube").hover(function () {  
             var name = $(this).attr('class');
+            //console.log(name);
             name = name.replace("cube ", "")
             name = name.replace(" lightUp", "")
             name = name.replace(" lightDown", "")

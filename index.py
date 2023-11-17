@@ -19,6 +19,7 @@ with open('secure_key.txt','r') as file:
     secure_key=file.read().strip()
 r = sr.Recognizer()
 
+global language
 global user_id
 user_id = []
 global currentUserId
@@ -64,6 +65,11 @@ def favicon():
     # Assuming the favicon.ico file is in the 'static' folder
     return send_from_directory(app.static_folder, '/static/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+@app.route('/language', methods=['POST'])
+def languageSelected():
+    global language  # this is the syntax to use a global variable
+    language = request.form['value']
+    return language
 
 @app.route('/LogIn', methods=['POST'])
 def LogIn():
@@ -71,6 +77,7 @@ def LogIn():
     global secure_key
     global history
     global prompts
+    global language
     user_id=[]
     username = []
     password = []
@@ -103,7 +110,8 @@ def LogIn():
             conn.commit()
             data = cur.fetchall()
             currentUsername = data[0][0].capitalize()
-            return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history, prompts=prompts, username=currentUsername)
+            # print("language from python:",language)
+            return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history, prompts=prompts, username=currentUsername,language=language)
         i += 1
     return render_template('LogIn.html', flag="true", message="Incorrect Username or Password!", title="AI Code Generator")
 
@@ -112,16 +120,9 @@ def LogIn():
 def index():
     return render_template('LogIn.html', title='AI Code Generator')
 
-
-@app.route('/language', methods=['POST'])
-def languageSelected():
-    global language  # this is the syntax to use a global variable
-    language = request.form['value']
-    return language
-
-
 @app.route('/voice', methods=['POST'])
 def voice():
+    global language
     global user_question
     global currentUserId  # as it is a global variable so it is necessary to declare it at module level as well as in every function it is used in
     # here i'm kinda fetching the variable's value from the session in which i registered earlier in the /LogIn route
