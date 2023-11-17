@@ -174,7 +174,7 @@ def voice():
         conn.commit()
         data = cur.fetchall()
         currentUsername = data[0][0].capitalize()
-        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history, prompts=prompts, username=currentUsername)
+        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history, prompts=prompts, username=currentUsername,language=language)
     except Exception as e:
         return jsonify({'error': str(e)})
 
@@ -231,7 +231,7 @@ def ask_openai():
         conn.commit()
         data = cur.fetchall()
         currentUsername = data[0][0].capitalize()
-        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history, prompts=prompts, username=currentUsername)
+        return render_template('index.html', title='AI Code Generator', message=finalCode, history=history, prompts=prompts, username=currentUsername,language=language)
         # return jsonify({'response': "'"+response+"'"})
     except Exception as e:
         return jsonify({'error': str(e)})
