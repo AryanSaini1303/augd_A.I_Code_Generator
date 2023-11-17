@@ -13,6 +13,10 @@ Session(app)
 with open('api.txt', 'r') as file:
     apiKey = file.read().strip()
 openai.api_key = apiKey
+global secure_key
+secure_key=''
+with open('secure_key.txt','r') as file:
+    secure_key=file.read().strip()
 r = sr.Recognizer()
 
 global user_id
@@ -64,10 +68,13 @@ def favicon():
 @app.route('/LogIn', methods=['POST'])
 def LogIn():
     global currentUserId
+    global secure_key
+    global history
+    global prompts
     user_id=[]
     username = []
     password = []
-    cur.execute('''select id,name,password from users''')
+    cur.execute('''select id,name,pgp_sym_decrypt(password::bytea,%s) from users''',(secure_key,))
     data = cur.fetchall()
     i = 0
     while i < len(data):
@@ -82,8 +89,6 @@ def LogIn():
             currentUserId = user_id[i]
             # so i add the variable to a session for future use
             session['currentUserId'] = currentUserId
-            global history
-            global prompts
             cur.execute('''select code from history where user_id=%s order by id desc''', (currentUserId,)
                         )  # "," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
             history = cur.fetchall()
@@ -120,6 +125,8 @@ def voice():
     global user_question
     global currentUserId  # as it is a global variable so it is necessary to declare it at module level as well as in every function it is used in
     # here i'm kinda fetching the variable's value from the session in which i registered earlier in the /LogIn route
+    global history
+    global prompts
     currentUserId = session.get('currentUserId', None)
     user_question = voice_to_text()
     # print(voice_to_text())
@@ -161,11 +168,9 @@ def voice():
         conn.commit()
         cur.execute('''select code from history where user_id=%s order by id desc''', (currentUserId,)
                     )  # "," is necessary for system to interpret currnetUserId as a tuple even though it contains only one element as 'currentUserId' is of type int, and we're trying to index it, which is not allowed.
-        global history
         history = cur.fetchall()
         cur.execute(
             '''select prompt from history where user_id=%s order by id desc''', (currentUserId,))
-        global prompts
         prompts = cur.fetchall()
         cur.execute('''select name from users where id=%s''', (currentUserId,))
         conn.commit()
@@ -240,14 +245,15 @@ def ask_openai():
 def SignUp():
     global cur
     global conn
+    global secure_key
     cur.close()
     conn.close()
     conn = psycopg2.connect(database="CodeGenerator", user="postgres",
                             password="aryansaini9999", host="localhost", port="5432")
     cur = conn.cursor()
     try:
-        cur.execute('''insert into users (name,password) values(%s,%s)''',
-                    (request.form['username'], request.form['password']))
+        cur.execute('''insert into users (name,password) values(%s,pgp_sym_encrypt(%s,%s)::TEXT)''',
+                    (request.form['username'], request.form['password'],secure_key))
         conn.commit()
         return render_template('LogIn.html', flag='true', message="You can Log in with your new account now", title="AI Code Generator")
     except Exception as e:
