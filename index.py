@@ -194,7 +194,7 @@ def ask_openai():
         elif language == "java":
             user_question = user_question+" in java language"
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": "can you write code for me?"},
