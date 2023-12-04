@@ -285,5 +285,5 @@ def clear():
     return render_template('index.html', title='AI Code Generator', message="{(code)}", history=history, prompts=prompts, username=currentUsername)
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
